@@ -1,23 +1,24 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import classes from "./style.module.scss";
 import Button from "../Button";
 import { callAPI } from "../../domain/api";
 
-const FoodDetail = () => {
+const FoodCard = () => {
   const [data, setData] = useState([]);
-  const { id } = useParams();
+  //   const { id } = useParams();
 
   useEffect(() => {
     fetchData();
-  }, [id]);
+  }, []);
 
   const fetchData = async () => {
     try {
-      const response = await callAPI(`/lookup.php?i=${id}`, "GET");
-      setData(response.meals);
+      const response = await callAPI(`/search.php?s=Beef`, "GET");
+      setData(response.meals.slice(0, 5));
     } catch (error) {
       console.error("Error fetching data:", error);
       // Handle the error, show a user-friendly message, or retry the request.
@@ -147,7 +148,13 @@ const FoodDetail = () => {
                     </div>
                   </div>
                 </div>
-                <button>Add to Favorites</button>
+                <div className={classes.action}>
+                  <Link to={`/detail/${data.idMeal}`}>
+                    <button>Detail</button>
+                  </Link>
+
+                  <button>Add to Favorite</button>
+                </div>
               </div>
               <div className={classes.image}>
                 <img src={data.strMealThumb} alt="" />
@@ -159,4 +166,4 @@ const FoodDetail = () => {
   );
 };
 
-export default FoodDetail;
+export default FoodCard;

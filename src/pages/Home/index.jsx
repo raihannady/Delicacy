@@ -4,7 +4,7 @@ import classes from "./style.module.scss";
 import Menu from "../../components/Menu";
 import Button from "../../components/Button";
 import Header from "../../components/Header";
-import FoodDetail from "../../components/FoodDetail";
+import FoodCard from "../../components/FoodCard";
 import Card from "../../components/Card";
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
     <>
       <Header />
       <Menu />
-      <FoodDetail />
+      <FoodCard />
       <Card />
     </>
   );

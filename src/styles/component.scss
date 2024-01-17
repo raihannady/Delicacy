@@ -12,8 +12,9 @@
   font-family: $font-body;
   color: #408eba;
   border-radius: 0.5rem;
-  width: 25%;
+  width: 100%;
   text-align: center;
   font-weight: 500;
   cursor: pointer;
+  background-color: $color-primary;
 }

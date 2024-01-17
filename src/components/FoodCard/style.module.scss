@@ -1,8 +1,17 @@
 @import "../../styles/base.scss";
 
 .container {
-  display: grid;
+  @include directionX;
+  overflow-x: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  grid-auto-flow: row;
+  justify-items: center;
+  align-items: center;
   //   position: sticky;
+}
+.container::-webkit-scrollbar {
+  display: none;
 }
 .fooddetail {
   @include directionX;
@@ -11,15 +20,20 @@
   border: 0.5rem solid white;
   border-radius: 1rem;
   padding: 2rem 1rem;
-  max-width: 60%;
-  margin: auto;
-  button {
-    @include button;
-  }
+  width: min(95%, 45rem);
+  margin: 0 auto;
+  flex-basis: 100%;
   img {
     width: 450px;
   }
   .desc {
+    button {
+      @include button;
+    }
+
+    .action {
+      @include directionX;
+    }
     .ingredient {
       display: grid;
       grid-template-columns: auto auto;

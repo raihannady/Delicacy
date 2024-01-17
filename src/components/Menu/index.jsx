@@ -33,7 +33,11 @@ const Menu = () => {
                   <Link className={classes.link}>{category.strCategory}</Link>
                 </li>
               ))}
-            <li>Favorite</li>
+            <li>
+              <Link className={classes.link} to="/favorite">
+                Favorite
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
