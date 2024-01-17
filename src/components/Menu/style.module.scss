@@ -1,0 +1,20 @@
+@import "../../styles/base.scss";
+
+.container {
+  @include container;
+}
+
+.menu {
+  @include directionX;
+  list-style-type: none;
+  font-family: $font-body;
+
+  li {
+    padding: 1rem;
+    font-weight: 500;
+    .link {
+      text-decoration: none;
+      color: black;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@import "../../styles/base.scss";
+
+.header {
+  @include directionX;
+  font-size: 44.242px;
+  font-weight: 700;
+  padding: 0.5rem 2rem;
+}

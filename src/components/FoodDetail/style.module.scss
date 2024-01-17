@@ -1,0 +1,66 @@
+@import "../../styles/base.scss";
+
+.container {
+  @include directionX;
+  overflow-x: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  //   position: sticky;
+}
+.container::-webkit-scrollbar {
+  display: none;
+}
+.fooddetail {
+  @include directionX;
+  background-color: $color-primary;
+  align-items: center;
+  border: 0.5rem solid white;
+  border-radius: 1rem;
+  padding: 2rem 1rem;
+  max-width: 60%;
+  margin: auto;
+  //   flex-basis: 0 0 auto;
+  //   flex-wrap: nowrap;
+  .image {
+    // position: absolute;
+  }
+  img {
+    width: 450px;
+    // position: absolute;
+    // left: 45%;
+  }
+  .desc {
+    .ingredient {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 1fr;
+      width: 20%;
+      .layout {
+        @include directionX;
+        padding: 1rem;
+        font-family: $font-body;
+        align-items: center;
+        .svg {
+          margin-right: 1rem;
+          padding: 0.5rem 1rem;
+          box-shadow: 1px 1px 1px 1px rgba(180, 180, 180, 0.247);
+          border: 1px solid white;
+          border-radius: 0.5rem;
+        }
+      }
+    }
+    h1 {
+      font-size: 25px;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-family: $font-body;
+      margin-bottom: 2rem;
+    }
+    h2 {
+      color: #969696;
+      margin-bottom: 1rem;
+    }
+  }
+}
