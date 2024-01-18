@@ -1,29 +1,74 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import classes from "./style.module.scss";
-import Button from "../Button";
 import { callAPI } from "../../domain/api";
+import { callAPI2 } from "../../domain/api2";
 
-const FoodCard = () => {
+const FoodCard = ({ category }) => {
   const [data, setData] = useState([]);
-  //   const { id } = useParams();
 
   useEffect(() => {
     fetchData();
-  }, []);
+    // postFavorite();
+  }, [category]);
+
+  const postFavorite = async (data) => {
+    try {
+      const response = await callAPI2("/favorite", "POST", data);
+      setData(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const fetchData = async () => {
     try {
-      const response = await callAPI(`/search.php?s=Beef`, "GET");
-      setData(response.meals.slice(0, 5));
+      const response = await callAPI(`/filter.php?c=${category}`, "GET");
+      const slicedResponse = response?.meals?.slice(0, 5);
+      const modifiedResponse = slicedResponse?.map(async (item) => {
+        const responseByName = await callAPI(
+          `/lookup.php?i=${item.idMeal}`,
+          "GET"
+        );
+        const {
+          idMeal,
+          strInstructions,
+          strIngredient1,
+          strMeasure1,
+          strIngredient2,
+          strMeasure2,
+          strIngredient3,
+          strMeasure3,
+          strIngredient4,
+          strMeasure4,
+          strMealThumb,
+          strMeal,
+        } = responseByName.meals[0];
+        return {
+          idMeal,
+          strInstructions,
+          strIngredient1,
+          strMeasure1,
+          strIngredient2,
+          strMeasure2,
+          strIngredient3,
+          strMeasure3,
+          strIngredient4,
+          strMeasure4,
+          strMealThumb,
+          strMeal,
+        };
+      });
+
+      const finalResponse = await Promise.all(modifiedResponse);
+      setData(finalResponse);
     } catch (error) {
       console.error("Error fetching data:", error);
-      // Handle the error, show a user-friendly message, or retry the request.
     }
   };
+
   return (
     <>
       <div className={classes.container}>
@@ -31,8 +76,8 @@ const FoodCard = () => {
           data.map((data, index) => (
             <div key={index} className={classes.fooddetail}>
               <div className={classes.desc}>
-                <h1>{data.strMeal}</h1>
-                <p>{data.strInstructions}</p>
+                <h1>{data.strMeal.slice(0, 20)}</h1>
+                <p>{data.strInstructions.slice(0, 200) + "..."}</p>
                 <h2>Ingredients</h2>
                 <div className={classes.ingredient}>
                   <div className={classes.layout}>
@@ -153,7 +198,18 @@ const FoodCard = () => {
                     <button>Detail</button>
                   </Link>
 
-                  <button>Add to Favorite</button>
+                  <button
+                    onClick={() => {
+                      postFavorite({
+                        id: data.idMeal,
+                        title: data.strMeal,
+                        // image: data.strMealThumb,
+                      });
+                      // setData(data);
+                    }}
+                  >
+                    Add to Favorite
+                  </button>
                 </div>
               </div>
               <div className={classes.image}>

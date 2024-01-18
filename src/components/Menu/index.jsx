@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 import classes from "./style.module.scss";
 import { callAPI } from "../../domain/api";
 
-const Menu = () => {
+const Menu = ({ onCategoryChange }) => {
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -22,6 +21,10 @@ const Menu = () => {
     }
   };
 
+  const handleMenuClick = async (category) => {
+    onCategoryChange(category);
+  };
+
   return (
     <>
       <div className={classes.container}>
@@ -30,7 +33,13 @@ const Menu = () => {
             {categories &&
               categories.map((category, index) => (
                 <li key={index}>
-                  <Link className={classes.link}>{category.strCategory}</Link>
+                  <Link
+                    to="/"
+                    onClick={() => handleMenuClick(category.strCategory)}
+                    className={classes.link}
+                  >
+                    {category.strCategory}
+                  </Link>
                 </li>
               ))}
             <li>

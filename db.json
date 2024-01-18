@@ -1,10 +1,28 @@
 {
   "favorite": [
-    { "id": "1", "title": "Beef Steak" },
-    { "id": "2", "title": "Egg Salad" },
-    { "id": "3", "title": "Caesar Salad" },
-    { "id": "4", "title": "Spaghetti" },
-    { "id": "5", "title": "Crab Claws" },
-    { "id": "6", "title": "Grilled Salmon" }
+    {
+      "id": "1",
+      "title": "Beef Steak"
+    },
+    {
+      "id": "2",
+      "title": "Egg Salad"
+    },
+    {
+      "id": "3",
+      "title": "Caesar Salad"
+    },
+    {
+      "id": "4",
+      "title": "Spaghetti"
+    },
+    {
+      "id": "5",
+      "title": "Crab Claws"
+    },
+    {
+      "id": "6",
+      "title": "Grilled Salmon"
+    }
   ]
 }

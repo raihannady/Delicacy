@@ -7,8 +7,10 @@
   }
 
   .cardContainer {
-    @include directionX;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    gap: 2rem;
     .card {
       @include directionY;
       font-family: $font-body;
@@ -20,20 +22,7 @@
       text-align: center;
       justify-content: space-between;
       padding: 1rem 0;
-      margin-right: 4rem;
-      position: relative;
-      img {
-        width: 120px;
-        position: absolute;
-        bottom: 3.5rem;
-        right: 1.7rem;
-        border-radius: 100%;
-      }
-      .name {
-        text-decoration: none;
-        color: black;
-        margin-top: 1rem;
-      }
+      //   margin-right: 4rem;
     }
   }
 }
