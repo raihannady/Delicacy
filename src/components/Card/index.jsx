@@ -41,7 +41,9 @@ const Card = ({ category }) => {
                     <div>
                       <img src={item.strMealThumb} alt={item.strMeal} />
                     </div>
-                    <div className={classes.name}>{item.strMeal}</div>
+                    <div className={classes.name}>
+                      <h5>{item.strMeal}</h5>
+                    </div>
                   </div>
                 </div>
               </Link>

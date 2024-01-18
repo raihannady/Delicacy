@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import classes from "./style.module.scss";
 import Button from "../Button";
 import { callAPI } from "../../domain/api";
+import { callAPI2 } from "../../domain/api2";
 
 const FoodDetail = () => {
   const [data, setData] = useState([]);
@@ -23,6 +24,25 @@ const FoodDetail = () => {
       // Handle the error, show a user-friendly message, or retry the request.
     }
   };
+
+  const postFavorite = async (data) => {
+    try {
+      await callAPI2(
+        "/favorite",
+        "POST",
+        {},
+        {},
+        {
+          id: data.idMeal,
+          title: data.strMeal,
+          image: data.strMealThumb,
+        }
+      );
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   return (
     <>
       <div className={classes.container}>
@@ -147,7 +167,14 @@ const FoodDetail = () => {
                     </div>
                   </div>
                 </div>
-                <button>Add to Favorites</button>
+                <button
+                  onClick={() => {
+                    postFavorite(data);
+                    alert("Added to favorite");
+                  }}
+                >
+                  Add to Favorite
+                </button>
               </div>
               <div className={classes.image}>
                 <img src={data.strMealThumb} alt="" />

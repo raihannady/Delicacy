@@ -11,17 +11,7 @@ const FoodCard = ({ category }) => {
 
   useEffect(() => {
     fetchData();
-    // postFavorite();
   }, [category]);
-
-  const postFavorite = async (data) => {
-    try {
-      const response = await callAPI2("/favorite", "POST", data);
-      setData(response);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   const fetchData = async () => {
     try {
@@ -64,6 +54,24 @@ const FoodCard = ({ category }) => {
 
       const finalResponse = await Promise.all(modifiedResponse);
       setData(finalResponse);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const postFavorite = async (data) => {
+    try {
+      await callAPI2(
+        "/favorite",
+        "POST",
+        {},
+        {},
+        {
+          id: data.idMeal,
+          title: data.strMeal,
+          image: data.strMealThumb,
+        }
+      );
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -200,12 +208,8 @@ const FoodCard = ({ category }) => {
 
                   <button
                     onClick={() => {
-                      postFavorite({
-                        id: data.idMeal,
-                        title: data.strMeal,
-                        // image: data.strMealThumb,
-                      });
-                      // setData(data);
+                      postFavorite(data);
+                      alert("Favorite Added");
                     }}
                   >
                     Add to Favorite

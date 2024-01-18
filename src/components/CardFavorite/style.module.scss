@@ -7,10 +7,15 @@
   }
 
   .cardContainer {
-    margin-top: 1rem;
+    margin-top: 6rem;
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
-    gap: 2rem;
+    gap: 4rem;
+    button {
+      @include button;
+      width: 80%;
+      margin: auto;
+    }
     .card {
       @include directionY;
       font-family: $font-body;
@@ -22,7 +27,17 @@
       text-align: center;
       justify-content: space-between;
       padding: 1rem 0;
+      position: relative;
+      height: 150px;
+      margin-top: 3rem;
       //   margin-right: 4rem;
+      img {
+        width: 100px;
+        position: absolute;
+        bottom: 8.3rem;
+        right: 2.3rem;
+        border-radius: 100%;
+      }
     }
   }
 }

@@ -30,9 +30,18 @@ const CardFavorite = () => {
               <div key={index} className={classes.cardBehind}>
                 <div className={classes.card}>
                   <div>
-                    <img src="" alt="" />
+                    <img src={data.image} alt="" />
                   </div>
                   <div>{data.title}</div>
+                  <button
+                    onClick={() => {
+                      callAPI2(`/favorite/${data.id}`, "DELETE"),
+                        window.location.reload();
+                      alert("Favorite Removed");
+                    }}
+                  >
+                    Remove Favorite
+                  </button>
                 </div>
               </div>
             ))}
